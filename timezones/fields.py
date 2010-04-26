@@ -166,6 +166,6 @@ try:
                                 {
                                     "max_length": ["max_length", { "default": MAX_TIMEZONE_LENGTH }],
                                 })],
-                            patterns=['timezones\.models\.'])
+                            patterns=['timezones\.fields\.'])
 except ImportError:
     pass

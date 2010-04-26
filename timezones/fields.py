@@ -155,3 +155,17 @@ def prep_localized_datetime(sender, **kwargs):
 ## RED_FLAG: need to add a check at manage.py validation time that
 ##           time_zone value is a valid query keyword (if it is one)
 signals.class_prepared.connect(prep_localized_datetime)
+
+
+# allow South to handle TimeZoneField smoothly
+try:
+    from south.modelsinspector import add_introspection_rules
+    add_introspection_rules(rules=[(
+                                (TimeZoneField, ), 
+                                [], 
+                                {
+                                    "max_length": ["max_length", { "default": MAX_TIMEZONE_LENGTH }],
+                                })],
+                            patterns=['timezones\.models\.'])
+except ImportError:
+    pass

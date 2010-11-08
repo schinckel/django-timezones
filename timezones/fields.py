@@ -84,7 +84,7 @@ class LocalizedDateTimeField(models.DateTimeField):
         defaults.update(kwargs)
         return super(LocalizedDateTimeField, self).formfield(**defaults)
     
-    def get_db_prep_save(self, value):
+    def get_db_prep_save(self, value, connection=None):
         """
         Returns field's value prepared for saving into a database.
         """
@@ -94,7 +94,7 @@ class LocalizedDateTimeField(models.DateTimeField):
                 value = default_tz.localize(value)
             else:
                 value = value.astimezone(default_tz)
-        return super(LocalizedDateTimeField, self).get_db_prep_save(value)
+        return super(LocalizedDateTimeField, self).get_db_prep_save(value, connection=connection)
     
     def get_db_prep_lookup(self, lookup_type, value, connection=None, prepared=None):
         """

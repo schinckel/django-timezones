@@ -98,7 +98,7 @@ class LocalizedDateTimeField(models.DateTimeField):
                 value = value.astimezone(default_tz)
         return super(LocalizedDateTimeField, self).get_db_prep_save(value, connection=connection)
     
-    def get_db_prep_lookup(self, lookup_type, value, connection, prepared=None):
+    def get_db_prep_lookup(self, lookup_type, value, connection=None, prepared=None):
         """
         Returns field's value prepared for database lookup.
         """
